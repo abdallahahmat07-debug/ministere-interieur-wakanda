@@ -31,40 +31,89 @@
         }
 
         .header-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .logos-container {
+        .header-logo {
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin: 20px 0;
+            gap: 30px;
+            flex: 1;
+        }
+
+        .flag-container, .logo-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .flag-container {
+            justify-content: flex-start;
+        }
+
+        .logo-container {
+            justify-content: flex-end;
         }
 
         header img {
-            height: 100px;
+            height: 150px; /* Augmenté de 100px à 150px */
             object-fit: contain;
             border-radius: 5px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            border: 3px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s;
+        }
+
+        header img:hover {
+            transform: scale(1.05);
+        }
+
+        .header-text {
+            flex: 2;
+            min-width: 300px;
+            text-align: center;
         }
 
         h1 {
             margin: 10px 0;
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 3rem; /* Augmenté de 2.5rem à 3rem */
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+            letter-spacing: 1px;
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.4rem; /* Augmenté de 1.2rem à 1.4rem */
             opacity: 0.9;
             margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .admin-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .admin-btn button {
+            background: var(--secondary-green);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .admin-btn button:hover {
+            background: #2a8b4a;
+            transform: scale(1.05);
         }
 
         nav {
@@ -114,28 +163,6 @@
 
         nav a:hover::after {
             width: 80%;
-        }
-
-        .admin-btn {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-        }
-
-        .admin-btn button {
-            background: var(--secondary-green);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .admin-btn button:hover {
-            background: #2a8b4a;
-            transform: scale(1.05);
         }
 
         .container {
@@ -353,6 +380,37 @@
             margin-bottom: 30px;
         }
 
+        @media (max-width: 1024px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-logo {
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+            }
+            
+            .flag-container, .logo-container {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            header img {
+                height: 120px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .admin-btn {
+                position: static;
+                margin-top: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -381,7 +439,11 @@
             }
             
             header img {
-                height: 80px;
+                height: 100px;
+            }
+            
+            .header-text {
+                min-width: 100%;
             }
         }
 
@@ -508,18 +570,32 @@
             color: #155724;
             border: 1px solid #c3e6cb;
         }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
     </style>
 </head>
 <body>
 
 <header>
     <div class="header-content">
-        <div class="logos-container">
-            <img src="drapeau_wakanda.jpg" alt="Drapeau de la République du Wakanda">
-            <img src="logo_wakanda.jpg" alt="Insigne du Ministère de l'Intérieur">
+        <div class="header-logo">
+            <div class="flag-container">
+                <img src="drapeau_wakanda.jpg" alt="Drapeau de la République du Wakanda">
+            </div>
+            
+            <div class="header-text">
+                <h1>Ministère de l'Intérieur</h1>
+                <p class="subtitle">République du Wakanda<br>Nation unie, futur sûr</p>
+            </div>
+            
+            <div class="logo-container">
+                <img src="logo_wakanda.jpg" alt="Insigne du Ministère de l'Intérieur">
+            </div>
         </div>
-        <h1>Ministère de l'Intérieur</h1>
-        <p class="subtitle">République du Wakanda<br>Nation unie, futur sûr</p>
     </div>
     <div class="admin-btn">
         <button onclick="openLogin()">🔐 Administration</button>
@@ -572,7 +648,7 @@
                             <li><strong>Neutralité Inébranlable</strong> : L'algorithme de MINIVOTE, tout comme l'administration qui le supervise, est totalement impartial. Il est codé pour la loi, et rien que pour la loi. L'égalité de traitement entre tous les candidats est absolue.</li>
                             <li><strong>Confiance Numérique Rétablie</strong> : Nous ne demandons pas une confiance aveugle, nous exigeons une confiance vérifiable. Nous avons intégré des mécanismes de traçabilité pour que chaque électeur et chaque partie prenante puisse avoir l'assurance que sa voix est comptée de manière exacte et définitive.</li>
                         </ul>
-                        <p><em>L'élection via MINIVOTE est une preuve de la maturité de notre démocratie. Elle montre que nous pouvons allier tradition républicaine et innovation technologique pour un avenir plus sûr et plus transparent.</em></p>
+                        <p><em>L'élection via MINIVOTE est une proove de la maturité de notre démocratie. Elle montre que nous pouvons allier tradition républicaine et innovation technologique pour un avenir plus sûr et plus transparent.</em></p>
                         <p><em>Je vous remercie de votre confiance dans ce progrès."</em></p>
                     </div>
                 </div>
